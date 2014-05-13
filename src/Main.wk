@@ -5,31 +5,25 @@ import File;
 import TestClass;
 import TableFileReader;
 import TestSuiteGenerator;
+import TableFileScanner;
 
 every Main is:
 
-	needs Printer, TableFileReader, FileSystem, TestSuiteGenerator;
+	needs Printer, TableFileReader, FileSystem, TestSuiteGenerator, TableFileScanner;
 
 	main() {
-		Printer.printLine("Finding test classes...");
-		var FilePath = FileSystem.getPath("bin/waketable");
-		var FilePath[] children = FilePath.getChildren();
+		var File[] = TableFileScanner.scan(FileSystem.getPath("bin/waketable"));
 		var TestClass[] tests = [];
 
-		for(var Num = 0; Num < children.getSize(); Num += 1) {
-			Printer.printLine("About to read " + children[Num].getPath());
-			var TestClass? = TableFileReader.readFrom(File <- children[Num]);
+		for(var Num = 0; Num < File.getSize(); Num += 1) {
+			var TestClass? = TableFileReader.readFrom(File[Num]);
 			if TestClass exists {
 				tests[tests.getSize()] = TestClass;
-				Printer.printLine("Class at " + children[Num].getPath() + " is a test class");
-			} else {
-				Printer.printLine("Class at " + children[Num].getPath() + " is not a test class");
 			}
 		}
 
-		Printer.printLine("Writing test suite");
-		var FilePath output = FileSystem.getPath("bin/TestSuite.wk");
-		output.delete();
-		TestSuiteGenerator.write(tests)To(File <- output);
+		var FilePath outputPath = FileSystem.getPath("bin/TestSuite.wk");
+		outputPath.delete();
+		TestSuiteGenerator.write(tests)To(File <- outputPath);
 		Printer.printLine("Done");
 	}

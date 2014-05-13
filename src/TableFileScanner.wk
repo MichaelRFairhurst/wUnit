@@ -1,0 +1,17 @@
+import FilePath;
+import File;
+
+every TableFileScanner is:
+
+	File[] -- scan(FilePath) {
+		var FilePath[] children = FilePath.getChildren();
+		var File[] = [];
+
+		for(var Num = 0; Num < children.getSize(); Num += 1) {
+			if(children[Num].getPath().substr(-6) == ".table") {
+				File[File.getSize()] = File <- children[Num];
+			}
+		}
+
+		return File;
+	}

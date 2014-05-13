@@ -1,0 +1,5 @@
+import Asserts;
+
+every ExampleTest is:
+
+	testOnePlusOne(Asserts) {}

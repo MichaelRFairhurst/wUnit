@@ -1,21 +1,95 @@
 import File;
 import TestClass;
-import Printer;
 
 every TableFileReader is:
 
-	needs Printer;
-	provides TestClass:Internal;
+	provides TestClass, WakeType;
 
 	TestClass? -- readFrom(File) {
 		var Text = readTextWithLengthTag(File);
-		Printer.printLine("Reading table for class " + Text);
 		if(Text.substr(-4) != "Test") return nothing;
 
-		return nothing;
+		if(File.readUnsignedChar() != 0) return nothing; // is abstract
+
+		var TestClass <- this;
+		TestClass.setName(Text);
+
+		var tag Num = 0;
+		while((tag := File.readUnsignedChar()) != 0) {
+			Text = File.read(tag); // get method name
+			readTextWithLengthTag(File); // get Casing
+			var flags Num = File.readUnsignedChar();
+			// TODO read these....
+			var WakeType = readType(File);
+
+			if(Text.substr(0, 4) != "test") continue;
+			if(WakeType.type != 1) continue;
+			if(WakeType.returntype != nothing) continue;
+			if(WakeType.arguments.getSize() != 1) continue;
+			if(WakeType.arguments[0].type != 2) continue;
+			if(WakeType.arguments[0].classname != "Asserts") continue;
+			if(WakeType.arguments[0].parameters.getSize() != 0) continue;
+			if(WakeType.arguments[0].arrayed != 0) continue;
+			if(WakeType.arguments[0].optional != 0) continue;
+
+			TestClass.addMethod(Text);
+		}
+
+		return TestClass;
+	}
+
+	WakeType -- readType(File) {
+		return readTypeByTag(File.readUnsignedChar(), File);
+	}
+
+	WakeType -- readTypeByTag(Num tag, File) {
+		var WakeType <- this;
+		WakeType.type = tag;
+		if(tag == 1) {
+			if((File.readUnsignedChar()) != 0) {
+				WakeType.returntype = readType(File);
+			}
+			while((tag := File.readUnsignedChar()) != 0) {
+				WakeType.arguments[WakeType.arguments.getSize()] = readTypeByTag(tag, File);
+			}
+		} else if(tag == 2) {
+			WakeType.classname = readTextWithLengthTag(File);
+			while((tag := File.readUnsignedChar()) != 0) {
+				WakeType.parameters[WakeType.parameters.getSize()] = readTypeByTag(tag, File);
+			}
+			//File.readUnsignedChar(); // shadow
+		} else if(tag == 3) {
+			WakeType.classname = readTextWithLengthTag(File); // label
+			if((tag := File.readUnsignedChar()) != 0) {
+				WakeType.upperbound = readType(File);
+			}
+			if((tag := File.readUnsignedChar()) != 0) {
+				WakeType.lowerbound = readType(File);
+			}
+			File.readUnsignedChar(); // shadow
+		}
+		WakeType.arrayed = File.readUnsignedChar();
+		readTextWithLengthTag(File); // read alias
+		readTextWithLengthTag(File); // read specialty
+		WakeType.optional = File.readUnsignedChar();
+
+		return WakeType;
 	}
 
 	Text -- readTextWithLengthTag(File) {
 		var Num = File.readUnsignedChar();
+		if(Num == 0) return "";
 		return File.read(Num);
 	}
+
+every WakeType is:
+
+	with public Num type = 0;
+	with public Num arrayed = 0;
+	with public Num optional = 0;
+	with public Text classname = "";
+	with public WakeType[] parameters = [];
+	with public WakeType? returntype = nothing;
+	with public WakeType[] arguments = [];
+	with public WakeType? upperbound = nothing;
+	with public WakeType? lowerbound = nothing;
