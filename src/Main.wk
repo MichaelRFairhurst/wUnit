@@ -23,7 +23,7 @@ every Main is:
 		}
 
 		var FilePath outputPath = FileSystem.getPath("bin/TestSuite.wk");
-		outputPath.delete();
+		if(outputPath.fileExists()) outputPath.delete();
 		TestSuiteGenerator.write(tests)To(File <- outputPath);
 		Printer.printLine("Done");
 	}
