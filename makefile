@@ -1,4 +1,4 @@
-PROGRAM := wUnit.js
+PROGRAM := wunit-compiler
 TABLEDIR := bin/waketable
 OBJECTDIR := bin/wakeobj
 SRCDIR := src
@@ -17,7 +17,7 @@ tests: bin/$(PROGRAM)-test
 	node bin/$(PROGRAM)-test
 
 bin/$(PROGRAM)-test: $(OBJECTFILES) $(TESTLIBRARYFILES) $(LIBRARYFILES) $(TABLEFILES)
-	node bin/wUnit.js
+	wunit-compiler
 	wake bin/TestSuite.wk -d $(TABLEDIR) -o bin/TestSuite.o
 	wake -l -d $(TABLEDIR) $(OBJECTFILES) $(TESTLIBRARYFILES) $(LIBRARYFILES) bin/TestSuite.o -o bin/$(PROGRAM)-test -c TestSuite -m 'tests()'
 
@@ -45,4 +45,8 @@ clean:
 	rm $(TABLEFILES) || :
 	rm $(DEPFILES) || :
 	rm $(OBJECTFILES) || :
+	rm bin/TestSuite.wk || :
+	rm bin/TestSuite.o || :
+	rm bin/$(PROGRAM) || :
+	rm bin/$(PROGRAM)-test || :
 	find . -name '*.md5' -delete
