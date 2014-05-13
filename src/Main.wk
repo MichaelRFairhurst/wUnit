@@ -1,0 +1,9 @@
+import Printer;
+
+every Main is:
+
+	needs Printer;
+
+	main() {
+		Printer.printLine("Hello");
+	}

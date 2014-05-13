@@ -1,0 +1,18 @@
+import File;
+import TestClass;
+
+every TabeFileReader is:
+
+	provides TestClass:Internal;
+
+	TestClass? -- readFrom(File) {
+		var Text = readTextWithLengthFlag();
+		if(Text.substr(-4) != "Test") return nothing;
+
+
+	}
+
+	Text -- readTextWithLengthTag(File) {
+		var Num = File.readUnsignedChar();
+		return File.read(Num);
+	}

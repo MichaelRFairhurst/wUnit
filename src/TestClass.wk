@@ -1,0 +1,18 @@
+import TestMethod;
+
+every TestClass is:
+
+	provides TestMethod:Internal;
+
+	with Text name = "";
+	with TestMethod[] = [];
+
+	addMethod(Text mname) {
+		var $TestMethod:Internal <- this;
+		$TestMethod.name = mname;
+		TestMethod[TestMethod.getSize()] = $TestMethod;
+	}
+
+	TestMethod[] -- getMethods() {
+		return TestMethod;
+	}

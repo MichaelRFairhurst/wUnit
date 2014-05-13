@@ -1,0 +1,44 @@
+import TestClass;
+import File;
+
+#>
+# will generate a file which looks like
+#
+# every TestSuite is:
+# 	needs YourFirstClassTest, YourSecondClassTest, YourThirdClassTest, TestResultReporter;
+#	provides Asserts;
+#	tests() {
+#		var Asserts <- this;
+#		TestResultReporter.begin("YourFirstClassTest", "testFirstMethod");
+#		YourFirstClassTest.testFirstMethod(Asserts);
+#		TestResultReporter.end(Asserts);
+#		// moar of these
+#		TestResultReporter.report();
+#	}
+##
+every TestSuiteGenerator is:
+
+	write(TestClass[])To(File) {
+		File.write("every TestSuite is: needs "
+
+		for(var Num = 0; Num < TestClass.getSize(); Num++) {
+			if(Num != 0) File.write(", ");
+			File.write(TestClass[Num].getName());
+		}
+
+		File.write(", TestResultReporter; provides Asserts; tests() {");
+		File.write("var Asserts <- this;");
+
+		for(var Num = 0; Num < TestClass.getSize(); Num++) {
+			var TestMethod[] = TestClass[Num].getMethods();
+
+			for(var $Num = 0; $Num < TestMethod.getSize(); $Num++) {
+				File.write("Asserts <- this;");
+				File.write("TestClassReporter.begin(\"" + TestClass[Num].getName() + "\", \"" + TestMethod[$Num].getName() + "\");");
+				File.write(TestClass[Num].getName() + "." + TestMethod[$Num].getName() + "(Asserts);");
+				File.write("TestClassReporter.end(Asserts);");
+			}
+		}
+
+		File.write("TestResultReporter.report(); }");
+	}
