@@ -1,0 +1,18 @@
+import Asserts;
+import Printer;
+
+every TestResultReporter is:
+
+	needs Printer;
+
+	begin(Text classname, Text methodname) {
+		Printer.printLine("starting " + classname + "." + methodname);
+	}
+
+	end(Asserts) {
+		Printer.printLine("Ending");
+	}
+
+	report() {
+		Printer.printLine("Reporting");
+	}

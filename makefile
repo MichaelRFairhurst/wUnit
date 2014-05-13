@@ -7,9 +7,19 @@ DEPFILES := ${SOURCEFILES:.wk=.d}
 OBJECTFILES := $(subst $(SRCDIR),$(OBJECTDIR),${SOURCEFILES:.wk=.o})
 TABLEFILES := $(subst $(SRCDIR),$(TABLEDIR),${SOURCEFILES:.wk=.table})
 LIBRARYFILES := bin/wakeobj/std.o
+TESTLIBRARYFILES := bin/wakeobj/TestResultReporter.o bin/wakeobj/Asserts.o
 
-bin/$(PROGRAM): $(OBJECTFILES) $(TABLEFILES) $(LIBRARYFILES)
+bin/$(PROGRAM): $(OBJECTFILES) $(TABLEFILES) $(LIBRARYFILES) tests
 	wake -l -d $(TABLEDIR) -o bin/$(PROGRAM) $(OBJECTFILES) $(LIBRARYFILES)
+
+.PHONY:
+tests: bin/$(PROGRAM)-test
+	node bin/$(PROGRAM)-test
+
+bin/$(PROGRAM)-test: $(OBJECTFILES) $(TESTLIBRARYFILES) $(LIBRARYFILES) $(TABLEFILES)
+	node bin/wUnit.js
+	wake bin/TestSuite.wk -d $(TABLEDIR) -o bin/TestSuite.o
+	wake -l -d $(TABLEDIR) $(OBJECTFILES) $(TESTLIBRARYFILES) $(LIBRARYFILES) bin/TestSuite.o -o bin/$(PROGRAM)-test -c TestSuite -m 'tests()'
 
 to-md5 = $1 $(addsuffix .md5,$1)
 

@@ -20,6 +20,11 @@ import File;
 every TestSuiteGenerator is:
 
 	write(TestClass[])To(File) {
+		for(var $$$Num = 0; $$$Num < TestClass.getSize(); $$$Num += 1) {
+			File.write("import " + TestClass[$$$Num].getName() + ";");
+		}
+
+		File.write("import TestResultReporter; import Asserts; import Printer;");
 		File.write("every TestSuite is: needs ");
 
 		for(var Num = 0; Num < TestClass.getSize(); Num += 1) {
@@ -27,7 +32,7 @@ every TestSuiteGenerator is:
 			File.write(", ");
 		}
 
-		File.write("TestResultReporter; provides Asserts; tests() {");
+		File.write("TestResultReporter; provides Asserts, Printer; tests() {");
 		File.write("var Asserts <- this;");
 
 		for(var $$Num = 0; $$Num < TestClass.getSize(); $$Num += 1) {
@@ -35,9 +40,9 @@ every TestSuiteGenerator is:
 
 			for(var $Num = 0; $Num < TestMethod.getSize(); $Num += 1) {
 				File.write("Asserts <- this;");
-				File.write("TestClassReporter.begin(\"" + TestClass[$$Num].getName() + "\", \"" + TestMethod[$Num].getName() + "\");");
-				File.write(TestClass[$$Num].getName() + "." + TestMethod[$Num].getName() + "(Asserts);");
-				File.write("TestClassReporter.end(Asserts);");
+				File.write("TestResultReporter.begin(\"" + TestClass[$$Num].getName() + "\", \"" + TestMethod[$Num].getName() + "\");");
+				File.write(TestClass[$$Num].getName() + "." + TestMethod[$Num].getName() + ";");
+				File.write("TestResultReporter.end(Asserts);");
 			}
 		}
 
