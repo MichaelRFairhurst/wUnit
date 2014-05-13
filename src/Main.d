@@ -1,2 +1,2 @@
-bin/wakeobj/Main.o: src/Main.wk bin/waketable/Printer.table.md5
-bin/waketable/Main.table: src/Main.wk bin/waketable/Printer.table.md5
+bin/wakeobj/Main.o: src/Main.wk bin/waketable/Printer.table.md5 bin/waketable/FileSystem.table.md5 bin/waketable/FilePath.table.md5 bin/waketable/File.table.md5 bin/waketable/TestClass.table.md5 bin/waketable/TableFileReader.table.md5 bin/waketable/TestSuiteGenerator.table.md5
+bin/waketable/Main.table: src/Main.wk bin/waketable/Printer.table.md5 bin/waketable/FileSystem.table.md5 bin/waketable/FilePath.table.md5 bin/waketable/File.table.md5 bin/waketable/TestClass.table.md5 bin/waketable/TableFileReader.table.md5 bin/waketable/TestSuiteGenerator.table.md5

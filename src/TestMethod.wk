@@ -2,3 +2,7 @@ every TestMethod is:
 
 	// Eventually these will be needs
 	with Text name = "";
+
+	Text -- getName() {
+		return name;
+	}

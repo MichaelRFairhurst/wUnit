@@ -7,6 +7,10 @@ every TestClass is:
 	with Text name = "";
 	with TestMethod[] = [];
 
+	Text -- getName() {
+		return name;
+	}
+
 	addMethod(Text mname) {
 		var $TestMethod:Internal <- this;
 		$TestMethod.name = mname;

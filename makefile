@@ -1,4 +1,4 @@
-PROGRAM := finaltest.js
+PROGRAM := wUnit.js
 TABLEDIR := bin/waketable
 OBJECTDIR := bin/wakeobj
 SRCDIR := src

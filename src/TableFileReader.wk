@@ -1,15 +1,18 @@
 import File;
 import TestClass;
+import Printer;
 
-every TabeFileReader is:
+every TableFileReader is:
 
+	needs Printer;
 	provides TestClass:Internal;
 
 	TestClass? -- readFrom(File) {
-		var Text = readTextWithLengthFlag();
+		var Text = readTextWithLengthTag(File);
+		Printer.printLine("Reading table for class " + Text);
 		if(Text.substr(-4) != "Test") return nothing;
 
-
+		return nothing;
 	}
 
 	Text -- readTextWithLengthTag(File) {
