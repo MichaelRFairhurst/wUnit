@@ -20,7 +20,7 @@ After all, unit testing is what wake was made to do.
 It will print test progress as well as failed tests broken down by assertion. Basic, but doable.
 
 
-Example Test Case:
+### Example Test Case:
 
     import Asserts;
 
@@ -35,7 +35,7 @@ Example Test Case:
         }
 
 
-Available Assertions:
+### Available Assertions:
 
     Asserts.that(Int)Equals(Int);
 
