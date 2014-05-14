@@ -34,6 +34,16 @@ It will print test progress as well as failed tests broken down by assertion. Ba
             Asserts.that(2+2)Equals(4);
         }
 
+        // test with freeform method names work too
+        ~[test with freeform method name!!]~(Asserts) {
+            Asserts.that(1 == 1);
+        }
+
+        // no matter your preference for spaces
+        ~[ test with space starting freeform method name ]~(Asserts) {
+            Asserts.that(true)IsTrue();
+        }
+
 
 ### Available Assertions:
 
