@@ -1,8 +1,8 @@
 wUnit
 =====
 
-An xUnit style testing framework for the language [wake](wakelang.com).
------------------------------------------------------------------------
+An xUnit style testing framework for the language [wake](http://www.wakelang.com).
+----------------------------------------------------------------------------------
 
 wUnit is a critical piece of developing wake software. It ships with the
 standard wake seed project so that wake apps can instantly be unit tested.
