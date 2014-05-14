@@ -1,8 +1,10 @@
 import File;
 import TestClass;
+import Printer;
 
 every TableFileReader is:
 
+	needs Printer;
 	provides TestClass, WakeType;
 
 	TestClass? -- readFrom(File) {
@@ -57,7 +59,7 @@ every TableFileReader is:
 			while((tag := File.readUnsignedChar()) != 0) {
 				WakeType.parameters[WakeType.parameters.getSize()] = readTypeByTag(tag, File);
 			}
-			//File.readUnsignedChar(); // shadow
+			File.readUnsignedChar(); // shadow
 		} else if(tag == 3) {
 			WakeType.classname = readTextWithLengthTag(File); // label
 			if((tag := File.readUnsignedChar()) != 0) {

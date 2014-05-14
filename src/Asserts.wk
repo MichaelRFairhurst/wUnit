@@ -1,0 +1,79 @@
+#>
+# This takes assertions and prints failures, and then reports
+# at test end if something went wrong. At that point it should
+# be discarded and you should use a new one.
+##
+every Asserts is:
+
+	with Bool hasfailed = false;
+	with Text[] failures = [];
+	with Num assertions = 0;
+
+	fail($Text) {
+		hasfailed = true;
+		failures[failures.getSize()] = $Text;
+	}
+
+	that(actual Bool)Equals(Bool) {
+		assertions += 1;
+		if(Bool != actual) {
+			var $Text = "Failed asserting that ";
+			if(Bool) $Text = $Text + "true is equal to actual false";
+			else $Text = $Text + "false is equal to actual true";
+			fail($Text);
+		}
+	}
+
+	isFalse(Bool) {
+		that(Bool)Equals(false);
+	}
+
+	isTrue(Bool) {
+		that(Bool)Equals(true);
+	}
+
+	that(actual Num)Equals(Num) {
+		assertions += 1;
+		if(Num != actual) {
+			fail("Failed asserting that two numbers are equal. Will have more details after toString is implemented");
+		}
+	}
+
+	that(actual Text)Equals(Text) {
+		assertions += 1;
+		if(Text != actual) {
+			fail("Failed asserting that " + Text + " is equal to actual " + actual);
+		}
+	}
+
+	#>
+	# Assert true
+	##
+	that(Bool) {
+		assertions += 1;
+		if(!Bool) fail("Failed an assertion");
+	}
+
+	#>
+	# This is only for until we can provide and then
+	# watch an ErrorCounter instance.
+	##
+	Bool -- hasFailed() {
+		return hasfailed;
+	}
+
+	#>
+	# This is only for until we can provide and then
+	# watch an ErrorCounter instance.
+	##
+	Bool -- allPassed() {
+		return !hasfailed;
+	}
+
+	Text[] -- getFailureTexts() {
+		return failures;
+	}
+
+	Num -- getAssertions() {
+		return assertions;
+	}

@@ -1,18 +1,65 @@
 import Asserts;
 import Printer;
+#>import System;##
 
 every TestResultReporter is:
 
-	needs Printer;
+	needs Printer;//, System;
+
+	with Text class = "";
+	with Text method = "";
+	with Num testsrun = 0;
+	with Num testsfailed = 0;
+	with Num assertions = 0;
+	with Num coltracker = 0;
+
+	with Text[] output = [];
 
 	begin(Text classname, Text methodname) {
-		Printer.printLine("starting " + classname + "." + methodname);
+		class = classname; method = methodname;
 	}
 
 	end(Asserts) {
-		Printer.printLine("Ending");
+		testsrun += 1;
+		assertions += Asserts.getAssertions();
+
+		if(Asserts.hasFailed()) Printer.print("F");
+		else Printer.print(".");
+
+		coltracker += 1;
+		if(coltracker > 50) {
+			coltracker -= 50;
+			Printer.print("\n");
+		}
+
+		if(!Asserts.hasFailed()) return;
+
+		testsfailed += 1;
+
+		output[output.getSize()] = "Failure in " + class + "." + method + ":";
+
+		var Text[] = Asserts.getFailureTexts();
+		for(var Num = 0; Num < Text.getSize(); Num += 1) {
+			output[output.getSize()] = "\t" + Text[Num];
+		}
+
+		output[output.getSize()] = "";
 	}
 
 	report() {
-		Printer.printLine("Reporting");
+		Printer.printLine("");
+		Printer.printLine("");
+		Printer.print("Tests Run: ");
+		Printer.printLine(testsrun);
+		Printer.print("Tests Failed: ");
+		Printer.printLine(testsfailed);
+		Printer.print("Assertions: ");
+		Printer.printLine(assertions);
+		Printer.printLine("");
+
+		for(var Num = 0; Num < output.getSize(); Num += 1) {
+			Printer.printLine(output[Num]);
+		}
+
+		//if(testsfailed > 0) System.exit(1);
 	}

@@ -39,7 +39,7 @@ every TestSuiteGenerator is:
 			var TestMethod[] = TestClass[$$Num].getMethods();
 
 			for(var $Num = 0; $Num < TestMethod.getSize(); $Num += 1) {
-				File.write("Asserts <- this;");
+				File.write("Asserts = Asserts <- this;");
 				File.write("TestResultReporter.begin(\"" + TestClass[$$Num].getName() + "\", \"" + TestMethod[$Num].getName() + "\");");
 				File.write(TestClass[$$Num].getName() + "." + TestMethod[$Num].getName() + ";");
 				File.write("TestResultReporter.end(Asserts);");
