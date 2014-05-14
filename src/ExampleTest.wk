@@ -11,5 +11,5 @@ every ExampleTest is:
 	}
 
 	testFail2(Asserts) {
-		Asserts.that("hello")Equals("hey");
+		//Asserts.that("hello")Equals("hey");
 	}
