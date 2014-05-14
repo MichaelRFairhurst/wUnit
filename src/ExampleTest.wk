@@ -3,13 +3,13 @@ import Asserts;
 every ExampleTest is:
 
 	testOnePlusOne(Asserts) {
-		Asserts.that(1+1)Equals(2);
+		//Asserts.that(1+1)Equals(2);
 	}
 
 	testFail(Asserts) {
-		Asserts.that("hello")Equals("hey");
+		//Asserts.that("hello")Equals("hey");
 	}
 
 	testFail2(Asserts) {
-		Asserts.that("hello")Equals("hey");
+		//Asserts.that("hello")Equals("hey");
 	}
