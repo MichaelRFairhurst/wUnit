@@ -15,7 +15,7 @@ bin/$(PROGRAM): $(OBJECTFILES) $(TABLEFILES) $(LIBRARYFILES) tests
 
 .PHONY:
 install: bin/$(PROGRAM)
-	echo '#!/bin/node' > ~/bin/$(PROGRAM)
+	echo '#!/usr/bin/node' > ~/bin/$(PROGRAM)
 	cat bin/$(PROGRAM) >> ~/bin/$(PROGRAM)
 	chmod +x ~/bin/$(PROGRAM)
 
