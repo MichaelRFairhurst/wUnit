@@ -8,9 +8,16 @@ OBJECTFILES := $(subst $(SRCDIR),$(OBJECTDIR),${SOURCEFILES:.wk=.o})
 TABLEFILES := $(subst $(SRCDIR),$(TABLEDIR),${SOURCEFILES:.wk=.table})
 LIBRARYFILES := bin/wakeobj/std.o
 TESTLIBRARYFILES := bin/wakeobj/TestResultReporter.o bin/wakeobj/Asserts.o
+LIBRARYTABLES := $(filter-out $(wildcard ../compiler/bin/waketable/*Test.table), $(wildcard ../compiler/bin/waketable/*.table) )
 
 bin/$(PROGRAM): $(OBJECTFILES) $(TABLEFILES) $(LIBRARYFILES) tests
 	wake -l -d $(TABLEDIR) -o bin/$(PROGRAM) $(OBJECTFILES) $(LIBRARYFILES)
+
+.PHONY:
+install: bin/$(PROGRAM)
+	echo '#!/bin/node' > ~/bin/$(PROGRAM)
+	cat bin/$(PROGRAM) >> ~/bin/$(PROGRAM)
+	chmod +x ~/bin/$(PROGRAM)
 
 .PHONY:
 tests: bin/$(PROGRAM)-test
@@ -27,6 +34,9 @@ to-md5 = $1 $(addsuffix .md5,$1)
 	@$(if $(filter-out $(shell cat $@ 2>/dev/null),$(shell md5sum $*)),md5sum $* > $@)
 
 FORCE:
+
+$(addprefix $(TABLEDIR)/,$(notdir $(LIBRARYTABLES))): $(LIBRARYTABLES)
+	cp $(LIBRARYTABLES) $(TABLEDIR)
 
 $(SRCDIR)/%.d: $(SRCDIR)/%.wk
 	@./generate-makefile.sh $< $(TABLEDIR) > $@

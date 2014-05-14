@@ -24,7 +24,7 @@ every TableFileReader is:
 			// TODO read these....
 			var WakeType = readType(File);
 
-			if(Text.substr(0, 4) != "test") continue;
+			if(Text.substr(0, 4) != "test" && Text.substr(0, 6) != "~[test" && Text.substr(0,7) != "~[ test") continue;
 			if(WakeType.type != 1) continue;
 			if(WakeType.returntype != nothing) continue;
 			if(WakeType.arguments.getSize() != 1) continue;
