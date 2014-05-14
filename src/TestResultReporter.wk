@@ -1,10 +1,10 @@
 import Asserts;
 import Printer;
-#>import System;##
+import System;
 
 every TestResultReporter is:
 
-	needs Printer;//, System;
+	needs Printer, System;
 
 	with Text class = "";
 	with Text method = "";
@@ -61,5 +61,5 @@ every TestResultReporter is:
 			Printer.printLine(output[Num]);
 		}
 
-		//if(testsfailed > 0) System.exit(1);
+		if(testsfailed > 0) System.exit(1);
 	}

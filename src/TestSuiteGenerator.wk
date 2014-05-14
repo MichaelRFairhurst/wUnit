@@ -24,7 +24,7 @@ every TestSuiteGenerator is:
 			File.write("import " + TestClass[$$$Num].getName() + ";");
 		}
 
-		File.write("import TestResultReporter; import Asserts; import Printer;");
+		File.write("import System; import TestResultReporter; import Asserts; import Printer;");
 		File.write("every TestSuite is: needs ");
 
 		for(var Num = 0; Num < TestClass.getSize(); Num += 1) {
