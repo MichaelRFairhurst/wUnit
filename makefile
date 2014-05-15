@@ -1,5 +1,5 @@
 PROGRAM := wunit-compiler
-LIBRARYFILES := ../compiler/bin/wakeobj/std.o
+LIBRARYFILES := bin/wakeobj/std.o
 LIBRARYTABLES := $(filter-out $(wildcard ../compiler/bin/waketable/*Test.table), $(wildcard ../compiler/bin/waketable/*.table) )
 TESTLIBRARYFILES :=
 
