@@ -5,7 +5,8 @@ import Printer;
 every TableFileReader is:
 
 	needs Printer;
-	provides TestClass, WakeType;
+	provides TestClass, Text <- { return addingclassname; },  WakeType;
+	with Text addingclassname = "";
 
 	TestClass? -- readFrom(File) {
 		var Text = readTextWithLengthTag(File);
@@ -13,8 +14,8 @@ every TableFileReader is:
 
 		if(File.readUnsignedChar() != 0) return nothing; // is abstract
 
+		addingclassname = Text;
 		var TestClass <- this;
-		TestClass.setName(Text);
 
 		var tag Num = 0;
 		while((tag := File.readUnsignedChar()) != 0) {

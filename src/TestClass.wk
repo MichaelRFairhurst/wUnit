@@ -2,22 +2,20 @@ import TestMethod;
 
 every TestClass is:
 
-	provides TestMethod:Internal;
+	needs Text name;
 
-	with Text name = "";
+	provides TestMethod, Text <- { return addingmethodname; };
+	with Text addingmethodname = "";
+
 	with TestMethod[] = [];
-
-	setName(Text) {
-		name = Text;
-	}
 
 	Text -- getName() {
 		return name;
 	}
 
 	addMethod(Text mname) {
-		var $TestMethod:Internal <- this;
-		$TestMethod.name = mname;
+		addingmethodname = mname;
+		var $TestMethod <- this;
 		TestMethod[TestMethod.getSize()] = $TestMethod;
 	}
 

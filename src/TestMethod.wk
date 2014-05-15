@@ -1,7 +1,7 @@
 every TestMethod is:
 
 	// Eventually these will be needs
-	with Text name = "";
+	needs Text name;
 
 	Text -- getName() {
 		return name;
