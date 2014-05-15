@@ -20,8 +20,8 @@ import File;
 every TestSuiteGenerator is:
 
 	write(TestClass[])To(File) {
-		for(var $$$Num = 0; $$$Num < TestClass.getSize(); $$$Num += 1) {
-			File.write("import " + TestClass[$$$Num].getName() + ";");
+		for(var Num = 0; Num < TestClass.getSize(); Num += 1) {
+			File.write("import " + TestClass[Num].getName() + ";");
 		}
 
 		File.write("import System; import TestResultReporter; import Asserts; import Printer;");
@@ -35,13 +35,13 @@ every TestSuiteGenerator is:
 		File.write("TestResultReporter; provides Asserts, Printer; tests() {");
 		File.write("var Asserts <- this;");
 
-		for(var $$Num = 0; $$Num < TestClass.getSize(); $$Num += 1) {
-			var TestMethod[] = TestClass[$$Num].getMethods();
+		for(var Num = 0; Num < TestClass.getSize(); Num += 1) {
+			var TestMethod[] = TestClass[Num].getMethods();
 
 			for(var $Num = 0; $Num < TestMethod.getSize(); $Num += 1) {
 				File.write("Asserts = Asserts <- this;");
-				File.write("TestResultReporter.begin(\"" + TestClass[$$Num].getName() + "\", \"" + TestMethod[$Num].getName() + "\");");
-				File.write(TestClass[$$Num].getName() + "." + TestMethod[$Num].getName() + ";");
+				File.write("TestResultReporter.begin(\"" + TestClass[Num].getName() + "\", \"" + TestMethod[Num].getName() + "\");");
+				File.write(TestClass[Num].getName() + "." + TestMethod[$Num].getName() + ";");
 				File.write("TestResultReporter.end(Asserts);");
 			}
 		}
