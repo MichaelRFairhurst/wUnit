@@ -35,7 +35,7 @@ every Asserts is:
 	that(actual Num)Equals(Num) {
 		assertions += 1;
 		if(Num != actual) {
-			fail("Failed asserting that two numbers are equal. Will have more details after toString is implemented");
+			fail("Failed asserting that " + Num.toString() + " is equal to actual " + actual.toString());
 		}
 	}
 
