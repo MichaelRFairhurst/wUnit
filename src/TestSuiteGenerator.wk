@@ -40,7 +40,7 @@ every TestSuiteGenerator is:
 
 			for(var $Num = 0; $Num < TestMethod.getSize(); $Num += 1) {
 				File.write("Asserts = Asserts <- this;");
-				File.write("TestResultReporter.begin(\"" + TestClass[Num].getName() + "\", \"" + TestMethod[Num].getName() + "\");");
+				File.write("TestResultReporter.begin(\"" + TestClass[Num].getName() + "\", \"" + TestMethod[$Num].getName() + "\");");
 				File.write(TestClass[Num].getName() + "." + TestMethod[$Num].getName() + ";");
 				File.write("TestResultReporter.end(Asserts);");
 			}
