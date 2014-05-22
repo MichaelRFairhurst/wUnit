@@ -36,14 +36,14 @@ every TestResultReporter is:
 
 		testsfailed += 1;
 
-		output[output.getSize()] = "Failure in " + class + "." + method + ":";
+		output.push("Failure in " + class + "." + method + ":");
 
 		var Text[] = Asserts.getFailureTexts();
-		for(var Num = 0; Num < Text.getSize(); Num += 1) {
-			output[output.getSize()] = "\t" + Text[Num];
+		for(var Num = 0; Num < Text[].getSize(); Num += 1) {
+			output.push("\t" + Text[Num]);
 		}
 
-		output[output.getSize()] = "";
+		output.push("");
 	}
 
 	report() {

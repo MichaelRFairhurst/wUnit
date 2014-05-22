@@ -15,10 +15,10 @@ every Main is:
 		var File[] = TableFileScanner.scan(FileSystem.getPath("bin/waketable"));
 		var TestClass[] tests = [];
 
-		for(var Num = 0; Num < File.getSize(); Num += 1) {
+		for(var Num = 0; Num < File[].getSize(); Num += 1) {
 			var TestClass? = TableFileReader.readFrom(File[Num]);
 			if TestClass exists {
-				tests[tests.getSize()] = TestClass;
+				tests.push(TestClass);
 			}
 		}
 

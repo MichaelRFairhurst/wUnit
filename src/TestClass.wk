@@ -15,10 +15,10 @@ every TestClass is:
 
 	addMethod(Text mname) {
 		addingmethodname = mname;
-		var $TestMethod <- this;
-		TestMethod[TestMethod.getSize()] = $TestMethod;
+		var TestMethod <- this;
+		TestMethod[].push(TestMethod);
 	}
 
 	TestMethod[] -- getMethods() {
-		return TestMethod;
+		return TestMethod[];
 	}

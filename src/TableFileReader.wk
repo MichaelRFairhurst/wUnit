@@ -53,12 +53,12 @@ every TableFileReader is:
 				WakeType.returntype = readType(File);
 			}
 			while((tag := File.readUnsignedChar()) != 0) {
-				WakeType.arguments[WakeType.arguments.getSize()] = readTypeByTag(tag, File);
+				WakeType.arguments.push(readTypeByTag(tag, File));
 			}
 		} else if(tag == 2) {
 			WakeType.classname = readTextWithLengthTag(File);
 			while((tag := File.readUnsignedChar()) != 0) {
-				WakeType.parameters[WakeType.parameters.getSize()] = readTypeByTag(tag, File);
+				WakeType.parameters.push(readTypeByTag(tag, File));
 			}
 			File.readUnsignedChar(); // shadow
 		} else if(tag == 3) {
