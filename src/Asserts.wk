@@ -9,9 +9,9 @@ every Asserts is:
 	with Text[] failures = [];
 	with Num assertions = 0;
 
-	fail($Text) {
+	fail(Text) {
 		hasfailed = true;
-		failures[failures.getSize()] = $Text;
+		failures.push(Text);
 	}
 
 	that(actual Bool)Equals(Bool) {
