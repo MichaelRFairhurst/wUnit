@@ -27,7 +27,7 @@ every TestResultReporter is:
 		else Printer.print(".");
 
 		coltracker += 1;
-		if(coltracker > 50) {
+		if(coltracker == 50) {
 			coltracker -= 50;
 			Printer.print("\n");
 		}
