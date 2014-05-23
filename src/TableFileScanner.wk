@@ -3,13 +3,12 @@ import File;
 
 every TableFileScanner is:
 
-	File[] -- scan(FilePath) {
-		var FilePath[] children = FilePath.getChildren();
+	File[] -- scan($FilePath) {
 		var File[] = [];
 
-		for(var Num = 0; Num < children.getSize(); Num += 1) {
-			if(children[Num].getPath().substr(-6) == ".table") {
-				File[].push(File <- children[Num]);
+		foreach($FilePath.getChildren()) {
+			if(FilePath.getPath().substr(-6) == ".table") {
+				File[].push(File <- FilePath);
 			}
 		}
 

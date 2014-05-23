@@ -38,9 +38,8 @@ every TestResultReporter is:
 
 		output.push("Failure in " + class + "." + method + ":");
 
-		var Text[] = Asserts.getFailureTexts();
-		for(var Num = 0; Num < Text[].getSize(); Num += 1) {
-			output.push("\t" + Text[Num]);
+		foreach(Asserts.getFailureTexts()) {
+			output.push("\t" + Text);
 		}
 
 		output.push("");
@@ -57,8 +56,9 @@ every TestResultReporter is:
 		Printer.printLine(assertions);
 		Printer.printLine("");
 
-		for(var Num = 0; Num < output.getSize(); Num += 1) {
-			Printer.printLine(output[Num]);
+		var Text[] = output; // @TODO foreachin
+		foreach(Text[]) {
+			Printer.printLine(Text);
 		}
 
 		if(testsfailed > 0) System.exit(1);
