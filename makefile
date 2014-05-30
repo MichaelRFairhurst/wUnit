@@ -1,24 +1,28 @@
 PROGRAM := wunit-compiler
-LIBRARYFILES := ../compiler/bin/wakeobj/std.o
-LIBRARYTABLES := $(filter-out $(wildcard ../compiler/bin/waketable/*Test.table), $(wildcard ../compiler/bin/waketable/*.table) )
-TESTLIBRARYFILES :=
 
-TABLEDIR := bin/waketable
-OBJECTDIR := bin/wakeobj
+# set to false or it will be linked with a main()
+EXECUTABLE := false
+
 SRCDIR := src
 TESTDIR := test
+TABLEDIR := bin/waketable
+OBJECTDIR := bin/wakeobj
+SRCDEPDIR := bin/srcdep
+TESTDEPDIR := bin/testdep
 
 SOURCEFILES := $(wildcard $(SRCDIR)/*.wk)
 TESTFILES := $(wildcard $(TESTDIR)/*.wk)
 
-DEPFILES := ${SOURCEFILES:.wk=.d} ${TESTFILES:.wk=.d}
+DEPFILES := $(subst $(SRCDIR),$(SRCDEPDIR),${SOURCEFILES:.wk=.d}) $(subst $(TESTDIR),$(TESTDEPDIR),${TESTFILES:.wk=.d})
 OBJECTFILES := $(subst $(SRCDIR),$(OBJECTDIR),${SOURCEFILES:.wk=.o})
 TESTOBJECTFILES := $(subst $(TESTDIR),$(OBJECTDIR),${TESTFILES:.wk=.o})
 TABLEFILES := $(subst $(SRCDIR),$(TABLEDIR),${SOURCEFILES:.wk=.table})
 TESTTABLEFILES := $(subst $(TESTDIR),$(TABLEDIR),${TESTFILES:.wk=.table})
 
 bin/$(PROGRAM): $(OBJECTFILES) $(TABLEFILES) $(LIBRARYFILES) tests
-	wake -l -d $(TABLEDIR) -o bin/$(PROGRAM) $(OBJECTFILES) $(LIBRARYFILES)
+ifeq ($(EXECUTABLE), true)
+		wake -l -d $(TABLEDIR) -o bin/$(PROGRAM) $(OBJECTFILES) $(LIBRARYFILES)
+endif
 
 .PHONY:
 install: bin/$(PROGRAM)
@@ -45,10 +49,10 @@ FORCE:
 $(addprefix $(TABLEDIR)/,$(notdir $(LIBRARYTABLES))): $(LIBRARYTABLES)
 	cp $(LIBRARYTABLES) $(TABLEDIR)
 
-$(SRCDIR)/%.d: $(SRCDIR)/%.wk
+$(SRCDEPDIR)/%.d: $(SRCDIR)/%.wk
 	@./generate-makefile.sh $< $(TABLEDIR) > $@
 
-$(TESTDIR)/%.d: $(TESTDIR)/%.wk
+$(TESTDEPDIR)/%.d: $(TESTDIR)/%.wk
 	@./generate-makefile.sh $< $(TABLEDIR) > $@
 
 $(TABLEDIR)/%.table: $(SRCDIR)/%.wk
@@ -64,7 +68,7 @@ $(OBJECTDIR)/%Test.o: $(TESTDIR)/%Test.wk
 	wake $< -d $(TABLEDIR) -o $@
 
 ifneq "$(MAKECMDGOALS)" "clean"
--include ${SOURCEFILES:.wk=.d}
+-include $(DEPFILES)
 endif
 
 clean:
