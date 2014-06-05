@@ -1,7 +1,7 @@
 PROGRAM := wunit-compiler
 
 # set to false or it will be linked with a main()
-EXECUTABLE := false
+EXECUTABLE := true
 
 LIBRARYFILES := ../compiler/bin/wakeobj/std.o
 LIBRARYTABLES := $(filter-out $(wildcard ../compiler/bin/waketable/*Test.table), $(wildcard ../compiler/bin/waketable/*.table) )
