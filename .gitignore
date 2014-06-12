@@ -1,2 +1,4 @@
 *.d
 bin
+gen
+lib
