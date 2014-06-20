@@ -4,8 +4,8 @@ PROGRAM := wunit-compiler
 EXECUTABLE := true
 
 # Include all wake libraries by default since there aren't many just yet
-LIBRARYFILES := $(filter-out Asserts TestResultReporter,$(wildcard lib/obj/*.o))
-LIBRARYTABLES := $(filter-out Asserts TestResultReporter,$(wildcard lib/table/*.table))
+LIBRARYFILES := $(filter-out Asserts TestResultReporter TableFileReader,$(wildcard lib/obj/*.o))
+LIBRARYTABLES := $(filter-out Asserts TestResultReporter TableFileReader,$(wildcard lib/table/*.table))
 TESTLIBRARYFILES :=
 
 ##
