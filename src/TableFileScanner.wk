@@ -8,7 +8,7 @@ every TableFileScanner is:
 
 		foreach($FilePath.getChildren()) {
 			if(FilePath.getPath().substr(-6) == ".table") {
-				File[].push(File <- FilePath);
+				File[].push(File from FilePath);
 			}
 		}
 

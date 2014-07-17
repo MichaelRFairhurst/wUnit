@@ -15,7 +15,7 @@ every TestClass is:
 
 	addMethod(Text mname) {
 		addingmethodname = mname;
-		var TestMethod <- this;
+		var TestMethod from this;
 		TestMethod[].push(TestMethod);
 	}
 

@@ -9,7 +9,7 @@ import File;
 # 	needs YourFirstClassTest, YourSecondClassTest, YourThirdClassTest, TestResultReporter;
 #	provides Asserts;
 #	tests() {
-#		var Asserts <- this;
+#		var Asserts from this;
 #		TestResultReporter.begin("YourFirstClassTest", "testFirstMethod");
 #		YourFirstClassTest.testFirstMethod(Asserts);
 #		TestResultReporter.end(Asserts);
@@ -33,11 +33,11 @@ every TestSuiteGenerator is:
 		}
 
 		File.write("TestResultReporter; provides Asserts, Printer; tests() {");
-		File.write("var Asserts <- this;");
+		File.write("var Asserts from this;");
 
 		foreach(TestClass[]) {
 			foreach(TestClass.getMethods()) {
-				File.write("Asserts = Asserts <- this;");
+				File.write("Asserts = Asserts from this;");
 				File.write("TestResultReporter.begin(\"" + TestClass.getName() + "\", \"" + TestMethod.getName() + "\");");
 				File.write(TestClass.getName() + "." + TestMethod.getName() + ";");
 				File.write("TestResultReporter.end(Asserts);");

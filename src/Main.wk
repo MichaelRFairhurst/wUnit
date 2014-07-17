@@ -24,6 +24,6 @@ every Main is:
 
 		var FilePath outputPath = FileSystem.getPath("bin/TestSuite.wk");
 		if(outputPath.fileExists()) outputPath.delete();
-		TestSuiteGenerator.write(tests)To(File <- outputPath);
+		TestSuiteGenerator.write(tests)To(File from outputPath);
 		Printer.printLine("Done");
 	}

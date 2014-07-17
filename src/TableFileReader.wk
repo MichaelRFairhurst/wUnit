@@ -15,7 +15,7 @@ every TableFileReader is:
 		if(File.readUnsignedChar() != 0) return nothing; // is abstract
 
 		addingclassname = Text;
-		var TestClass <- this;
+		var TestClass from this;
 
 		var tag Num = 0;
 		while((tag := File.readUnsignedChar()) != 0) {
@@ -46,7 +46,7 @@ every TableFileReader is:
 	}
 
 	WakeType -- readTypeByTag(Num tag, File) {
-		var WakeType <- this;
+		var WakeType from this;
 		WakeType.type = tag;
 		if(tag == 1) {
 			if((File.readUnsignedChar()) != 0) {
