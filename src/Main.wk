@@ -2,23 +2,26 @@ import Printer;
 import FileSystem;
 import FilePath;
 import File;
-import TestClass;
+import WakeClass;
 import TableFileReader;
 import TestSuiteGenerator;
-import TableFileScanner;
+import TableDirectoryScanner;
+import TestClassFilterer;
 
 every Main is:
 
-	needs Printer, TableFileReader, FileSystem, TestSuiteGenerator, TableFileScanner;
+	needs Printer, TableFileReader, FileSystem, TestSuiteGenerator, TableDirectoryScanner, TestClassFilterer;
 
 	main() {
-		var File[] = TableFileScanner.scan(FileSystem.getPath("bin/waketable"));
-		var TestClass[] tests = [];
+		var File[] = TableDirectoryScanner.scan(FileSystem.getPath("bin/waketable"));
+		var WakeClass[] tests = [];
 
 		foreach(File[]) {
-			var TestClass? = TableFileReader.readFrom(File);
-			if TestClass exists {
-				tests.push(TestClass);
+			var WakeClass? = TableFileReader.readFrom(File);
+			if WakeClass exists {
+				if(TestClassFilterer.Is(WakeClass)ATestClass()) {
+					tests.push(WakeClass);
+				}
 			}
 		}
 

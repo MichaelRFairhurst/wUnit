@@ -1,0 +1,11 @@
+import WakeClass;
+import TestMethodFilterer;
+import WakeProperty;
+
+every TestClassFilterer is:
+
+	needs TestMethodFilterer;
+
+	Bool -- Is(WakeClass)ATestClass() {
+		return WakeClass.classname.substr(-4,0) != "Test";
+	}

@@ -1,6 +1,8 @@
-import TestClass;
-import TestMethod;
+import WakeClass;
+import WakeProperty;
 import File;
+import TestMethodFilterer;
+import Map;
 
 #>
 # will generate a file which looks like
@@ -19,27 +21,30 @@ import File;
 ##
 every TestSuiteGenerator is:
 
-	write(TestClass[])To(File) {
-		foreach(TestClass[]) {
-			File.write("import " + TestClass.getName() + ";");
+	needs TestMethodFilterer;
+
+	write(WakeClass[])To(File) {
+		foreach(WakeClass[]) {
+			File.write("import " + WakeClass.classname + ";");
 		}
 
 		File.write("import System; import TestResultReporter; import Asserts; import Printer;");
 		File.write("every TestSuite is: needs ");
 
-		foreach(TestClass[]) {
-			File.write(TestClass.getName());
+		foreach(WakeClass[]) {
+			File.write(WakeClass.classname);
 			File.write(", ");
 		}
 
 		File.write("TestResultReporter; provides Asserts, Printer; tests() {");
 		File.write("var Asserts from this;");
 
-		foreach(TestClass[]) {
-			foreach(TestClass.getMethods()) {
+		foreach(WakeClass[]) {
+			foreach(WakeClass.properties.getValues()) {
+				if(!TestMethodFilterer.Is(WakeProperty)ATestMethod()) return;
 				File.write("Asserts = Asserts from this;");
-				File.write("TestResultReporter.begin(\"" + TestClass.getName() + "\", \"" + TestMethod.getName() + "\");");
-				File.write(TestClass.getName() + "." + TestMethod.getName() + ";");
+				File.write("TestResultReporter.begin(\"" + WakeClass.classname + "\", \"" + WakeProperty.classname + "\");");
+				File.write(WakeClass.classname + "." + WakeProperty.classname + ";");
 				File.write("TestResultReporter.end(Asserts);");
 			}
 		}

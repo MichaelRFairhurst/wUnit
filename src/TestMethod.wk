@@ -1,8 +1,0 @@
-every TestMethod is:
-
-	// Eventually these will be needs
-	needs Text name;
-
-	Text -- getName() {
-		return name;
-	}
