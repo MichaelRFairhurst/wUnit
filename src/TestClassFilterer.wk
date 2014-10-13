@@ -6,6 +6,6 @@ every TestClassFilterer is:
 
 	needs TestMethodFilterer;
 
-	Bool -- Is(WakeClass)ATestClass() {
+	Bool -- isClass(WakeClass)ATestClass() {
 		return WakeClass.classname.substr(-4,WakeClass.classname.getSize()) == "Test";
 	}

@@ -19,7 +19,7 @@ every Main is:
 		foreach(File[]) {
 			var WakeClass? = TableFileReader.readFrom(File);
 			if WakeClass exists {
-				if(TestClassFilterer.Is(WakeClass)ATestClass()) {
+				if(TestClassFilterer.isClass(WakeClass)ATestClass()) {
 					tests.push(WakeClass);
 				}
 			}

@@ -3,7 +3,7 @@ import WakeType;
 
 every TestMethodFilterer is:
 
-	Bool -- Is(WakeProperty)ATestMethod() {
+	Bool -- isProperty(WakeProperty)ATestMethod() {
 		if(WakeProperty.name.substr(0, 4) == "test") return true;
 		if(WakeProperty.name.substr(0, 6) == "~[test") return true;
 		if(WakeProperty.name.substr(0, 7) == "~[ test") return true;

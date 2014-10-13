@@ -41,7 +41,7 @@ every TestSuiteGenerator is:
 
 		foreach(WakeClass[]) {
 			foreach(WakeClass.properties.getValues()) {
-				if(!TestMethodFilterer.Is(WakeProperty)ATestMethod()) continue;
+				if(!TestMethodFilterer.isProperty(WakeProperty)ATestMethod()) continue;
 				File.write("Asserts = Asserts from this;");
 				File.write("TestResultReporter.begin(\"" + WakeClass.classname + "\", \"" + WakeProperty.name + "\");");
 				File.write(WakeClass.classname + "." + WakeProperty.name + ";");
