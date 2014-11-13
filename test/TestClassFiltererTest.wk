@@ -1,0 +1,25 @@
+import Asserts;
+import WakeClass;
+import TestClassFilterer;
+import ReflectionProvider;
+import Annotation;
+
+@TestClass
+every TestClassFiltererTest is:
+
+	needs ReflectionProvider, TestClassFilterer;
+
+	@Test
+	testNoAnnotationsIsNot(Asserts) {
+		var WakeClass from ReflectionProvider;
+		WakeClass.classname = "TestSomethingTest";
+		Asserts.that(TestClassFilterer.isClass(WakeClass)ATestClass())Equals(false);
+	}
+
+	@Test
+	testNoAnnotationsIs(Asserts) {
+		var WakeClass from ReflectionProvider;
+		WakeClass.classname = "Banana";
+		WakeClass.Annotation[].push(Annotation("TestClass") from ReflectionProvider);
+		Asserts.that(TestClassFilterer.isClass(WakeClass)ATestClass())Equals(true);
+	}

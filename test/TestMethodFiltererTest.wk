@@ -1,0 +1,25 @@
+import Asserts;
+import WakeProperty;
+import TestMethodFilterer;
+import ReflectionProvider;
+import Annotation;
+
+@TestClass
+every TestMethodFiltererTest is:
+
+	needs ReflectionProvider, TestMethodFilterer;
+
+	@Test
+	testNoAnnotationsIsNot(Asserts) {
+		var WakeProperty from ReflectionProvider;
+		WakeProperty.name = "testBlah()";
+		Asserts.that(TestMethodFilterer.isProperty(WakeProperty)ATestMethod())Equals(false);
+	}
+
+	@Test
+	testNoAnnotationsIs(Asserts) {
+		var WakeProperty from ReflectionProvider;
+		WakeProperty.name = "Banana";
+		WakeProperty.Annotation[].push(Annotation("Test") from ReflectionProvider);
+		Asserts.that(TestMethodFilterer.isProperty(WakeProperty)ATestMethod())Equals(true);
+	}

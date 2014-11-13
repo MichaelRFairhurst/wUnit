@@ -1,23 +1,29 @@
 import Asserts;
 
+@TestClass
 every ExampleTest is:
 
+	@Test
 	testOnePlusOne(Asserts) {
 		//Asserts.that(1+1)Equals(3);
 	}
 
+	@Test
 	testFail(Asserts) {
 		//Asserts.that("hello")Equals("hey");
 	}
 
+	@Test
 	testFail2(Asserts) {
 		//Asserts.that("hello")Equals("hey");
 	}
 
+	@Test
 	~[test this method]~(Asserts) {
 		//Asserts.that("hello")Equals("hey");
 	}
 
+	@Test
 	~[ test this method ]~(Asserts) {
 		//Asserts.that("hello")Equals("hey");
 	}

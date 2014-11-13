@@ -1,11 +1,19 @@
 import WakeClass;
 import TestMethodFilterer;
 import WakeProperty;
+import Annotation;
 
 every TestClassFilterer is:
 
 	needs TestMethodFilterer;
 
 	Bool -- isClass(WakeClass)ATestClass() {
-		return WakeClass.classname.substr(-4,WakeClass.classname.getSize()) == "Test";
+		foreach(WakeClass.Annotation[]) {
+			if(Annotation.name == "TestClass") {
+				return true;
+			}
+		}
+
+		return false;
+		//return WakeClass.classname.substr(-4,WakeClass.classname.getSize()) == "Test";
 	}
