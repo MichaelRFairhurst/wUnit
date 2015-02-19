@@ -16,7 +16,7 @@ every Asserts is:
 
 	{T} that(actual T)Equals(T)Otherwise(error Text) {
 		if(T != actual) {
-			fail(error);
+			fail(error Text);
 		}
 	}
 
