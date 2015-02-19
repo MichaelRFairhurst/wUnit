@@ -14,6 +14,12 @@ every Asserts is:
 		failures.push(Text);
 	}
 
+	{T} that(actual T)Equals(T)Otherwise(error Text) {
+		if(T != actual) {
+			fail(error);
+		}
+	}
+
 	that(actual Bool)Equals(Bool) {
 		assertions += 1;
 		if(Bool != actual) {

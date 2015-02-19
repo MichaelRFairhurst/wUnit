@@ -53,6 +53,9 @@ It will print test progress as well as failed tests broken down by assertion. Ba
 
     Asserts.that(Bool)Equals(Bool);
 
+	// compare any two objects of the same type, and specify the failure message
+	Asserts.that(T)Equals(T)Otherwise(error Text);
+
     Asserts.that(Bool);
 
     Asserts.that(Bool)IsTrue();
