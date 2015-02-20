@@ -47,8 +47,32 @@ It will print test progress as well as failed tests broken down by assertion. Ba
 
 ### Available Assertions:
 
-    Asserts.that(Int)Equals(Int);
+    Asserts.that(Num)Equals(Num);
+	
+	//Is Greater Than
+	Asserts.that(Num)IsGT(Num);
+	
+	//Is Greater Than or Equals
+	Asserts.that(Num)IsGTE(Num);
+	
+	//Is Less Than
+	Asserts.that(Num)IsLE(Num);
 
+	//Is Less Than or Equals
+	Asserts.that(Num)IsLTE(Num);
+	
+	//Is Greater Than w/ Custom Message
+	Asserts.that(Num)IsGT(Num)Otherwise(Text);
+	
+	//Is Greater Than or Equals w/ Custom Message
+	Asserts.that(Num)IsGTE(Num)Otherwise(Text);
+	
+	//Is Less Than w/ Custom Message
+	Asserts.that(Num)IsLE(Num)Otherwise(Text);
+
+	//Is Less Than or Equals w/ Custom Message
+	Asserts.that(Num)IsLTE(Num)Otherwise(Text);
+	
     Asserts.that(Text)Equals(Text);
 
     Asserts.that(Bool)Equals(Bool);
