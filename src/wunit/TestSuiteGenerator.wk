@@ -27,10 +27,12 @@ every TestSuiteGenerator is:
 
 	write(WakeClass[])To(File) {
 		foreach(WakeClass[]) {
-			File.write("import " + WakeClass.classname + ";");
+			File.write("import ");
+			if(WakeClass.modulename != "") File.write(WakeClass.modulename + ".");
+			File.write(WakeClass.classname + ";");
 		}
 
-		File.write("import System;\nimport TestResultReporter;\nimport Asserts;\nimport Printer;\n");
+		File.write("import std.System;\nimport wunit.TestResultReporter;\nimport wunit.Asserts;\nimport io.Printer;\n");
 		File.write("every TestSuite is:\n\tneeds\n");
 
 		foreach(WakeClass[]) {
