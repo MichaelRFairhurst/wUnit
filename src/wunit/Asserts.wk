@@ -43,7 +43,68 @@ every Asserts is:
 	that(actual Num)Equals(Num) {
 		assertions += 1;
 		if(Num != actual) {
-			fail("Failed asserting that " + Num.toString() + " is equal to actual " + actual.toString());
+			fail("Failed asserting that " + Num.toString()
+				 + " is equal to actual " + actual.toString());
+		}
+	}
+	
+	that(actual Num)IsGT(Num) {
+		assertions +=1;
+		if(actual <= Num) {
+			fail("Failed asserting that actual " + actual.toString()
+				 + " is greater than " + Num.toString());
+		}
+	}
+	
+	that(actual Num)IsGT(Num)Otherwise(Text) {
+		assertions +=1;
+		if(actual <= Num) {
+			fail(Text);
+		}
+	}
+	
+	that(actual Num)IsGTE(Num) {
+		assertions +=1;
+		if(actual < Num) {
+			fail("Failed asserting that actual " + actual.toString()
+				 + " is greater than or equal to " + Num.toString());
+		}
+	}
+	
+	that(actual Num)IsGTE(Num)Otherwise(Text) {
+		assertions +=1;
+		if(actual < Num) {
+			fail(Text);
+		}
+	}
+	
+	that(actual Num)IsLT(Num) {
+		assertions +=1;
+		if(actual >= Num) {
+			fail("Failed asserting that actual " + actual.toString() 
+				 + " is less than " + Num.toString());
+		}
+	}
+	
+	that(actual Num)IsLT(Num)Otherwise(Text) {
+		assertions +=1;
+		if(actual >= Num) {
+			fail(Text);
+		}
+	}
+	
+	that(actual Num)IsLTE(Num) {
+		assertions +=1;
+		if(actual > Num) {
+			fail("Failed asserting that actual " + actual.toString()
+				 + " is less than or equal to " + Num.toString());
+		}
+	}
+	
+	that(actual Num)IsLTE(Num)Otherwise(Text) {
+		assertions +=1;
+		if(actual > Num) {
+			fail(Text);
 		}
 	}
 
