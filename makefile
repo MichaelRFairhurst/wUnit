@@ -90,8 +90,11 @@ EXTTESTTABLEFILES := $(subst $(TESTDIR)/extern/js,$(TABLEDIR),${EXTTESTFILES:.wk
 
 
 ## ENTRY POINT ##
+ifeq ($(EXECUTABLE), true)
 all: bin/$(PROGRAM)
-
+else
+all: package
+endif
 
 ##
 # Include dynamic makefiles generated for each source file
@@ -117,12 +120,18 @@ ifneq ($(MOCKCLASSNAMES),)
 	MOCKPROVIDEROBJ := $(OBJECTDIR)/MockProvider.o
 endif
 
+## Build a package ##
+package: $(OBJECTFILES) $(TABLEFILES) $(RUNTESTS) $(EXTOBJECTFILES) $(EXTTABLEFILES)
+	@echo $(foreach module,$(subst $(OBJECTDIR)/,,$(wildcard $(OBJECTDIR)/*)), \
+		$(shell mkdir bin/packages/$(module)) \
+		$(shell mkdir bin/packages/$(module)/obj) \
+		$(shell mkdir bin/packages/$(module)/table) \
+		$(shell cp $(TABLEDIR)/$(module)/*.table bin/packages/$(module)/table) \
+		$(shell cp $(OBJECTDIR)/$(module)/*.o bin/packages/$(module)/obj))
 
 ## Compile our main executable ##
 bin/$(PROGRAM): $(OBJECTFILES) $(TABLEFILES) $(LIBRARYFILES) $(LIBRARYMODULEFILES) $(RUNTESTS) $(EXTOBJECTFILES) $(EXTTABLEFILES)
-ifeq ($(EXECUTABLE), true)
-		$(WAKE) -l -d $(TABLEDIR) -o bin/$(PROGRAM) $(OBJECTFILES) $(LIBRARYFILES) $(LIBRARYMODULEFILES) $(EXTOBJECTFILES)
-endif
+	$(WAKE) -l -d $(TABLEDIR) -o bin/$(PROGRAM) $(OBJECTFILES) $(LIBRARYFILES) $(LIBRARYMODULEFILES) $(EXTOBJECTFILES)
 
 
 ##
