@@ -1,3 +1,5 @@
+module wunit;
+
 #>
 # This takes assertions and prints failures, and then reports
 # at test end if something went wrong. At that point it should

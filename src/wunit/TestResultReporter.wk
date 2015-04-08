@@ -1,6 +1,8 @@
-import Asserts;
-import Printer;
-import System;
+module wunit;
+
+import std.System;
+import io.Printer;
+import wunit.Asserts;
 
 every TestResultReporter is:
 

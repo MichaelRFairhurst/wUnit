@@ -1,8 +1,10 @@
-import Asserts;
-import WakeClass;
-import TestClassFilterer;
-import ReflectionProvider;
-import Annotation;
+module wunit;
+
+import treflect.WakeClass;
+import treflect.ReflectionProvider;
+import treflect.Annotation;
+import wunit.Asserts;
+import wunit.TestClassFilterer;
 
 @TestClass
 every TestClassFiltererTest is:

@@ -1,12 +1,14 @@
-import Printer;
-import FileSystem;
-import FilePath;
-import File;
-import WakeClass;
-import TableFileReader;
-import TestSuiteGenerator;
-import TableDirectoryScanner;
-import TestClassFilterer;
+module wunit;
+
+import io.Printer;
+import io.FileSystem;
+import io.FilePath;
+import io.File;
+import treflect.WakeClass;
+import treflect.TableFileReader;
+import treflect.TableDirectoryScanner;
+import wunit.TestSuiteGenerator;
+import wunit.TestClassFilterer;
 
 every Main is:
 

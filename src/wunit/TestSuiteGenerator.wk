@@ -1,8 +1,10 @@
-import WakeClass;
-import WakeProperty;
-import File;
-import TestMethodFilterer;
-import Map;
+module wunit;
+
+import std.Map;
+import io.File;
+import treflect.WakeClass;
+import treflect.WakeProperty;
+import wunit.TestMethodFilterer;
 
 #>
 # will generate a file which looks like
@@ -25,29 +27,32 @@ every TestSuiteGenerator is:
 
 	write(WakeClass[])To(File) {
 		foreach(WakeClass[]) {
-			File.write("import " + WakeClass.classname + ";");
+			File.write("import ");
+			if(WakeClass.modulename != "") File.write(WakeClass.modulename + ".");
+			File.write(WakeClass.classname + ";");
 		}
 
-		File.write("import System; import TestResultReporter; import Asserts; import Printer;");
-		File.write("every TestSuite is: needs ");
+		File.write("import std.System;\nimport wunit.TestResultReporter;\nimport wunit.Asserts;\nimport io.Printer;\n");
+		File.write("every TestSuite is:\n\tneeds\n");
 
 		foreach(WakeClass[]) {
+			File.write("\t\t");
 			File.write(WakeClass.classname);
-			File.write(", ");
+			File.write(",\n");
 		}
 
-		File.write("TestResultReporter; provides Asserts, Printer; tests() {");
+		File.write("\t\tTestResultReporter;\n\tprovides Asserts, Printer;\n\n\ttests() {");
 		File.write("var Asserts from this;");
 
 		foreach(WakeClass[]) {
 			foreach(WakeClass.properties.getValues()) {
 				if(!TestMethodFilterer.isProperty(WakeProperty)ATestMethod()) continue;
-				File.write("Asserts = Asserts from this;");
-				File.write("TestResultReporter.begin(\"" + WakeClass.classname + "\", \"" + WakeProperty.name + "\");");
+				File.write("\n\t\tAsserts = Asserts from this;");
+				File.write("\n\t\tTestResultReporter.begin(\"" + WakeClass.classname + "\", \"" + WakeProperty.name + "\");\n\t\t");
 				File.write(WakeClass.classname + "." + WakeProperty.name + ";");
-				File.write("TestResultReporter.end(Asserts);");
+				File.write("\n\t\tTestResultReporter.end(Asserts);");
 			}
 		}
 
-		File.write("TestResultReporter.report(); }");
+		File.write("\n\t\tTestResultReporter.report();\n\t}");
 	}
