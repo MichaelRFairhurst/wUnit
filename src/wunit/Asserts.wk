@@ -48,6 +48,53 @@ every Asserts is:
 		}
 	}
 	
+	that(actual Num[])Equals(Num[]) {
+		var Num i = 0;
+		var Bool pass = true;
+		assertions +=1;
+		if (actual.getSize() != Num[].getSize()) {
+			pass = false;
+		} else {
+			for (i = 0; i< actual.getSize(); i+=1) {
+				if (actual[i] != Num[i]) {
+					pass = false;
+				}
+			}
+		}
+		if (!pass) {
+			var Text[] actText = [];
+			var Text[] = [];
+			for (i=0; i<actual.getSize(); i+=1) {
+				actText.push(actual[i].toString());
+			}
+			for (i=0; i<Num[].getSize(); i+=1) {
+				Text[].push(Num[i].toString());
+			}
+			
+			fail("failed to assert that actual [" + ", ".join(actText) + 
+				 "] is equal to [" + ", ".join(Text[]) + "]");
+		}
+	}
+	
+	that(actual Text[])Equals(Text[]) {
+		var Num i = 0;
+		var Bool pass = true;
+		assertions +=1;
+		if (actual.getSize() != Text[].getSize()) {
+			pass = false;
+		} else {
+			for (i = 0; i< actual.getSize(); i+=1) {
+				if (actual[i] != Text[i]) {
+					pass = false;
+				}
+			}
+		}
+		if (!pass) {
+			fail("failed to assert that actual [" + ", ".join(actual) + 
+				 "] is equal to [" + ", ".join(Text[]) + "]");
+		}
+	}
+	
 	that(actual Num)IsGT(Num) {
 		assertions +=1;
 		if(actual <= Num) {
