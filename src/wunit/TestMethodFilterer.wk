@@ -1,6 +1,8 @@
-import WakeProperty;
-import WakeType;
-import Annotation;
+module wunit;
+
+import treflect.WakeProperty;
+import treflect.WakeType;
+import treflect.Annotation;
 
 every TestMethodFilterer is:
 

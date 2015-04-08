@@ -1,4 +1,6 @@
-import Asserts;
+module wunit;
+
+import wunit.Asserts;
 
 @TestClass
 every ExampleTest is:

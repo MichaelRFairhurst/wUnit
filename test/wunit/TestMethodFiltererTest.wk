@@ -1,8 +1,10 @@
-import Asserts;
-import WakeProperty;
-import TestMethodFilterer;
-import ReflectionProvider;
-import Annotation;
+module wunit;
+
+import treflect.WakeProperty;
+import treflect.ReflectionProvider;
+import treflect.Annotation;
+import wunit.Asserts;
+import wunit.TestMethodFilterer;
 
 @TestClass
 every TestMethodFiltererTest is:
