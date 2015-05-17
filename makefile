@@ -1,4 +1,4 @@
-PROGRAM := your-program-name
+PROGRAM := wunit-compiler
 
 # set to false or it will be linked with a main()
 EXECUTABLE := true

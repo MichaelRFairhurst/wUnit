@@ -13,15 +13,21 @@ every TestMethodFiltererTest is:
 
 	@Test
 	testNoAnnotationsIsNot(Asserts) {
+		Asserts.fail("fixme");
+		#>
 		var WakeProperty from ReflectionProvider;
 		WakeProperty.name = "testBlah()";
 		Asserts.that(TestMethodFilterer.isProperty(WakeProperty)ATestMethod())Equals(false);
+		##
 	}
 
 	@Test
 	testNoAnnotationsIs(Asserts) {
+		Asserts.fail("fixme");
+		#>
 		var WakeProperty from ReflectionProvider;
 		WakeProperty.name = "Banana";
 		WakeProperty.Annotation[].push(Annotation("Test") from ReflectionProvider);
 		Asserts.that(TestMethodFilterer.isProperty(WakeProperty)ATestMethod())Equals(true);
+		##
 	}
