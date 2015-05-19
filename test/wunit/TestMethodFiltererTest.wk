@@ -1,6 +1,9 @@
 module wunit;
 
 import treflect.WakeProperty;
+import treflect.WakeType;
+import treflect.WakeLambdaType;
+import treflect.WakeVarDecl;
 import treflect.ReflectionProvider;
 import treflect.Annotation;
 import wunit.Asserts;
@@ -13,21 +16,22 @@ every TestMethodFiltererTest is:
 
 	@Test
 	testNoAnnotationsIsNot(Asserts) {
-		Asserts.fail("fixme");
-		#>
-		var WakeProperty from ReflectionProvider;
+		var WakeType from ReflectionProvider;
+		WakeType.WakeLambdaType = WakeLambdaType from ReflectionProvider;
+		var WakeVarDecl(WakeType) from ReflectionProvider;
+		var WakeProperty(WakeVarDecl) from ReflectionProvider;
 		WakeProperty.name = "testBlah()";
 		Asserts.that(TestMethodFilterer.isProperty(WakeProperty)ATestMethod())Equals(false);
-		##
 	}
 
 	@Test
 	testNoAnnotationsIs(Asserts) {
-		Asserts.fail("fixme");
-		#>
-		var WakeProperty from ReflectionProvider;
+		var WakeType from ReflectionProvider;
+		WakeType.WakeLambdaType = WakeLambdaType from ReflectionProvider;
+		var WakeVarDecl(WakeType) from ReflectionProvider;
+		var WakeProperty(WakeVarDecl) from ReflectionProvider;
+
 		WakeProperty.name = "Banana";
 		WakeProperty.Annotation[].push(Annotation("Test") from ReflectionProvider);
 		Asserts.that(TestMethodFilterer.isProperty(WakeProperty)ATestMethod())Equals(true);
-		##
 	}
