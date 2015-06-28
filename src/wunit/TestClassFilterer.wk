@@ -10,8 +10,8 @@ every TestClassFilterer is:
 	needs TestMethodFilterer;
 
 	Bool -- isClass(WakeClass)ATestClass() {
-		foreach(WakeClass.Annotation[]) {
-			if(Annotation.name == "TestClass") {
+		foreach WakeClass.Annotation[] {
+			if Annotation.name == "TestClass" {
 				return true;
 			}
 		}

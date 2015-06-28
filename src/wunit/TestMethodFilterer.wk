@@ -7,8 +7,8 @@ import treflect.Annotation;
 every TestMethodFilterer is:
 
 	Bool -- isProperty(WakeProperty)ATestMethod() {
-		foreach(WakeProperty.Annotation[]) {
-			if(Annotation.name == "Test") {
+		foreach WakeProperty.Annotation[] {
+			if Annotation.name == "Test" {
 				return true;
 			}
 		}

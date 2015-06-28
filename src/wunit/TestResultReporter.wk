@@ -25,22 +25,22 @@ every TestResultReporter is:
 		testsrun += 1;
 		assertions += Asserts.getAssertions();
 
-		if(Asserts.hasFailed()) Printer.print("F");
+		if Asserts.hasFailed() then Printer.print("F");
 		else Printer.print(".");
 
 		coltracker += 1;
-		if(coltracker == 50) {
+		if coltracker == 50 {
 			coltracker -= 50;
 			Printer.print("\n");
 		}
 
-		if(!Asserts.hasFailed()) return;
+		if !Asserts.hasFailed() then return;
 
 		testsfailed += 1;
 
 		output.push("Failure in " + class + "." + method + ":");
 
-		foreach(Asserts.getFailureTexts()) {
+		foreach Asserts.getFailureTexts() {
 			output.push("\t" + Text);
 		}
 
@@ -59,9 +59,9 @@ every TestResultReporter is:
 		Printer.printLine("");
 
 		var Text[] = output; // @TODO foreachin
-		foreach(Text[]) {
+		foreach Text[] {
 			Printer.printLine(Text);
 		}
 
-		if(testsfailed > 0) System.exit(1);
+		if testsfailed > 0 then System.exit(1);
 	}

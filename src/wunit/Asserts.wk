@@ -17,16 +17,16 @@ every Asserts is:
 	}
 
 	{T} that(actual T)Equals(T)Otherwise(error Text) {
-		if(T != actual) {
+		if T != actual {
 			fail(error);
 		}
 	}
 
 	that(actual Bool)Equals(Bool) {
 		assertions += 1;
-		if(Bool != actual) {
+		if Bool != actual {
 			var $Text = "Failed asserting that ";
-			if(Bool) $Text = $Text + "true is equal to actual false";
+			if Bool then $Text = $Text + "true is equal to actual false";
 			else $Text = $Text + "false is equal to actual true";
 			fail($Text);
 		}
@@ -42,75 +42,75 @@ every Asserts is:
 
 	that(actual Num)Equals(Num) {
 		assertions += 1;
-		if(Num != actual) {
+		if Num != actual {
 			fail("Failed asserting that " + Num.toString()
 				 + " is equal to actual " + actual.toString());
 		}
 	}
-	
+
 	that(actual Num)IsGT(Num) {
 		assertions +=1;
-		if(actual <= Num) {
+		if actual <= Num {
 			fail("Failed asserting that actual " + actual.toString()
 				 + " is greater than " + Num.toString());
 		}
 	}
-	
+
 	that(actual Num)IsGT(Num)Otherwise(Text) {
 		assertions +=1;
-		if(actual <= Num) {
+		if actual <= Num {
 			fail(Text);
 		}
 	}
-	
+
 	that(actual Num)IsGTE(Num) {
 		assertions +=1;
-		if(actual < Num) {
+		if actual < Num {
 			fail("Failed asserting that actual " + actual.toString()
 				 + " is greater than or equal to " + Num.toString());
 		}
 	}
-	
+
 	that(actual Num)IsGTE(Num)Otherwise(Text) {
 		assertions +=1;
-		if(actual < Num) {
+		if actual < Num {
 			fail(Text);
 		}
 	}
-	
+
 	that(actual Num)IsLT(Num) {
 		assertions +=1;
-		if(actual >= Num) {
-			fail("Failed asserting that actual " + actual.toString() 
+		if actual >= Num {
+			fail("Failed asserting that actual " + actual.toString()
 				 + " is less than " + Num.toString());
 		}
 	}
-	
+
 	that(actual Num)IsLT(Num)Otherwise(Text) {
 		assertions +=1;
-		if(actual >= Num) {
+		if actual >= Num {
 			fail(Text);
 		}
 	}
-	
+
 	that(actual Num)IsLTE(Num) {
 		assertions +=1;
-		if(actual > Num) {
+		if actual > Num {
 			fail("Failed asserting that actual " + actual.toString()
 				 + " is less than or equal to " + Num.toString());
 		}
 	}
-	
+
 	that(actual Num)IsLTE(Num)Otherwise(Text) {
 		assertions +=1;
-		if(actual > Num) {
+		if actual > Num {
 			fail(Text);
 		}
 	}
 
 	that(actual Text)Equals(Text) {
 		assertions += 1;
-		if(Text != actual) {
+		if Text != actual {
 			fail("Failed asserting that " + Text + " is equal to actual " + actual);
 		}
 	}
@@ -120,7 +120,7 @@ every Asserts is:
 	##
 	that(Bool) {
 		assertions += 1;
-		if(!Bool) fail("Failed an assertion");
+		if !Bool then fail("Failed an assertion");
 	}
 
 	#>

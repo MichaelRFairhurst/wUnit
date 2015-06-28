@@ -26,16 +26,16 @@ every TestSuiteGenerator is:
 	needs TestMethodFilterer;
 
 	write(WakeClass[])To(File) {
-		foreach(WakeClass[]) {
+		foreach WakeClass[] {
 			File.write("import ");
-			if(WakeClass.modulename != "") File.write(WakeClass.modulename + ".");
+			if WakeClass.modulename != "" then File.write(WakeClass.modulename + ".");
 			File.write(WakeClass.classname + ";");
 		}
 
 		File.write("import std.System;\nimport wunit.TestResultReporter;\nimport wunit.Asserts;\nimport io.Printer;\n");
 		File.write("every TestSuite is:\n\tneeds\n");
 
-		foreach(WakeClass[]) {
+		foreach WakeClass[] {
 			File.write("\t\t");
 			File.write(WakeClass.classname);
 			File.write(",\n");
@@ -44,14 +44,13 @@ every TestSuiteGenerator is:
 		File.write("\t\tTestResultReporter;\n\tprovides Asserts, Printer;\n\n\ttests() {");
 		File.write("var Asserts from this;");
 
-		foreach(WakeClass[]) {
-			foreach(WakeClass.properties.getValues()) {
-				if(!TestMethodFilterer.isProperty(WakeProperty)ATestMethod()) continue;
-				File.write("\n\t\tAsserts = Asserts from this;");
-				File.write("\n\t\tTestResultReporter.begin(\"" + WakeClass.classname + "\", \"" + WakeProperty.name + "\");\n\t\t");
-				File.write(WakeClass.classname + "." + WakeProperty.name + ";");
-				File.write("\n\t\tTestResultReporter.end(Asserts);");
-			}
+		foreach WakeClass[] do
+		foreach WakeClass.properties.getValues() {
+			if !TestMethodFilterer.isProperty(WakeProperty)ATestMethod() then continue;
+			File.write("\n\t\tAsserts = Asserts from this;");
+			File.write("\n\t\tTestResultReporter.begin(\"" + WakeClass.classname + "\", \"" + WakeProperty.name + "\");\n\t\t");
+			File.write(WakeClass.classname + "." + WakeProperty.name + ";");
+			File.write("\n\t\tTestResultReporter.end(Asserts);");
 		}
 
 		File.write("\n\t\tTestResultReporter.report();\n\t}");
