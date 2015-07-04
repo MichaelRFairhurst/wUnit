@@ -25,13 +25,13 @@ every TestResultReporter is:
 		testsrun += 1;
 		assertions += Asserts.getAssertions();
 
-		if Asserts.hasFailed() then Printer.print("F");
-		else Printer.print(".");
+		if Asserts.hasFailed() then Printer.print("F"s);
+		else Printer.print("."s);
 
 		coltracker += 1;
 		if coltracker == 50 {
 			coltracker -= 50;
-			Printer.print("\n");
+			Printer.print("\n"s);
 		}
 
 		if !Asserts.hasFailed() then return;
