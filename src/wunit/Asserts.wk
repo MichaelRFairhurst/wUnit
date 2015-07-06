@@ -48,6 +48,14 @@ every Asserts is:
 		}
 	}
 
+	that(actual Int)Equals(Int) {
+		assertions += 1;
+		if Int != actual {
+			fail("Failed asserting that " + Int.toText()
+				 + " is equal to actual " + actual.toText());
+		}
+	}
+
 	that(actual Num)IsGT(Num) {
 		assertions +=1;
 		if actual <= Num {
